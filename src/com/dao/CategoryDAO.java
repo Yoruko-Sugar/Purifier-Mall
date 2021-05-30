@@ -1,0 +1,11 @@
+package com.dao;
+import com.entity.*;
+
+import java.util.*;
+public interface CategoryDAO {
+	List<Category> selectAll(HashMap map);
+	void add(Category ct);
+	Category findById(int id);
+	void update(Category category);
+	void delete(int id);
+}

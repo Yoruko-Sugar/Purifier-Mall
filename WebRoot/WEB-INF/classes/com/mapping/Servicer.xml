@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.ServicerDAO">
+    <resultMap type="com.entity.Servicer" id="BaseResultMap">
+      <id column="id" property="id" jdbcType="INTEGER"/>
+      <id column="name" property="name" jdbcType="VARCHAR"/>
+      <id column="qq" property="qq" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    
+    <insert id="add" parameterType="servicer">
+      insert into servicer values(null,#{name},#{qq})
+    </insert>
+    
+    <select id="selectAll" parameterType="HashMap" resultMap="BaseResultMap">
+      select * from servicer where 1=1
+      <if test="key!=null and key!=''">
+        and name like "%"#{key}"%"
+      </if>
+     order by id desc
+    </select>
+    
+    <delete id="delete" parameterType="Int">
+      delete from servicer where id=#{id}
+    </delete>
+    
+    <select id="findById" parameterType="Int" resultType="servicer">
+      select * from servicer where id=#{id}
+    </select>
+    
+    <update id="update" parameterType="servicer">
+      update servicer 
+      <set>
+        <if test="name!=null and name!=''">
+          name = #{name},
+        </if>
+        <if test="qq!=null and qq!=''">
+          qq = #{qq}
+        </if>
+        where id=#{id}
+      </set>
+    </update>
+    
+	
+</mapper>
+
